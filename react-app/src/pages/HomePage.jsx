@@ -15,7 +15,7 @@ function HomePage() {
       .catch(error => console.error('Error fetching featured products:', error));
 
     // Fetch Featured Blogs
-    fetch('http://localhost:3000/api/blogs?featured=true') // Replace with your actual API endpoint
+    fetch('https://backend-two-alpha-98.vercel.app/api/blogs?featured=true') // Replace with your actual API endpoint
       .then(response => response.json())
       .then(data => setFeaturedBlogs(data))
       .catch(error => console.error('Error fetching featured blogs:', error));
