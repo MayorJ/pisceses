@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
 
-// We now accept two props from App.jsx
 function Navbar({ isLoggedIn, handleLogout }) {
   const { cartCount } = useCart();
   const navigate = useNavigate();
@@ -48,25 +47,23 @@ function Navbar({ isLoggedIn, handleLogout }) {
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">
-            {/* Conditional Admin/Admin Login link */}
             {isLoggedIn ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admin">Admin</Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/admin">Admin</Link>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="nav-link btn btn-link"
+                    onClick={handleLogoutClick}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
             ) : (
               <li className="nav-item">
                 <Link className="nav-link" to="/admin/login">Admin Login</Link>
-              </li>
-            )}
-            {/* Conditional Logout button */}
-            {isLoggedIn && (
-              <li className="nav-item">
-                <button
-                  className="nav-link btn btn-link"
-                  onClick={handleLogoutClick}
-                >
-                  Logout
-                </button>
               </li>
             )}
             <li className="nav-item">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import './style.css';
 import Navbar from './components/Navbar';
@@ -12,30 +12,34 @@ import AdminPage from './pages/AdminPage';
 import AdminLogin from './components/AdminLogin';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import RegisterPage from './pages/RegisterPage'; // New import
+import LoginPage from './pages/LoginPage'; // New import
 import { CartProvider } from './CartContext';
 
 function App() {
-  // Check localStorage for the initial login state
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem('isLoggedIn') === 'true'
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
+  // Check for a user token on initial load
+  useEffect(() => {
+    const token = localStorage.getItem('userToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = (token) => {
     setIsLoggedIn(true);
-    // Persist login state in localStorage
-    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userToken', token);
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    // Clear login state from localStorage
-    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.removeItem('userToken');
   };
 
   return (
     <Router>
       <CartProvider>
-        {/* Pass the logout handler to the Navbar */}
         <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} /> 
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -46,6 +50,10 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           
+          {/* New User Auth Routes */}
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          
           {/* Protected Admin Route */}
           <Route
             path="/admin"
@@ -53,8 +61,7 @@ function App() {
           />
           
           {/* Admin Login Route */}
-          <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
-          
+          <Route path="/admin/login" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
         </Routes>
         <Footer />
       </CartProvider>
