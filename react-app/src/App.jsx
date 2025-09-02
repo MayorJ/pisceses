@@ -15,16 +15,28 @@ import CheckoutPage from './pages/CheckoutPage';
 import { CartProvider } from './CartContext';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Check localStorage for the initial login state
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem('isLoggedIn') === 'true'
+  );
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    // Persist login state in localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    // Clear login state from localStorage
+    localStorage.setItem('isLoggedIn', 'false');
   };
 
   return (
     <Router>
       <CartProvider>
-        <Navbar />
+        {/* Pass the logout handler to the Navbar */}
+        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} /> 
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
