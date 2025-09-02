@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import ProductManagement from '../components/ProductManagement';
 import BlogManagement from '../components/BlogManagement';
-import OrderManagement from '../components/OrderManagement'; // This import was missing
 
 function AdminPage() {
   const [activeTab, setActiveTab] = useState('products');
@@ -13,8 +12,6 @@ function AdminPage() {
         return <ProductManagement />;
       case 'blogs':
         return <BlogManagement />;
-      case 'orders':
-        return <OrderManagement />;
       default:
         return <ProductManagement />;
     }
@@ -37,12 +34,6 @@ function AdminPage() {
               onClick={() => setActiveTab('blogs')}
             >
               Blog Management
-            </button>
-            <button
-              className={`list-group-item list-group-item-action ${activeTab === 'orders' ? 'active' : ''}`}
-              onClick={() => setActiveTab('orders')}
-            >
-              Order Management
             </button>
           </div>
         </div>
