@@ -14,8 +14,8 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import RegisterPage from './pages/RegisterPage'; 
 import LoginPage from './pages/LoginPage'; 
-import { CartProvider } from './contexts/CartContext';
-// import { CartProvider } from './CartContext';
+// import { CartProvider } from './contexts/CartContext';
+import { CartProvider } from './CartContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

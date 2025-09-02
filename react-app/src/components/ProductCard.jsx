@@ -1,6 +1,6 @@
 // src/components/ProductCard.jsx
 import React from 'react';
-import { useCart } from './contexts/CartContext';
+import { useCart } from '../CartContext';
 
 function ProductCard({ product }) {
   const { addItemToCart } = useCart();
