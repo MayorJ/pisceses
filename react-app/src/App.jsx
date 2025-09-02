@@ -12,29 +12,34 @@ import AdminPage from './pages/AdminPage';
 import AdminLogin from './components/AdminLogin';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
-import RegisterPage from './pages/RegisterPage'; // New import
-import LoginPage from './pages/LoginPage'; // New import
+import RegisterPage from './pages/RegisterPage'; 
+import LoginPage from './pages/LoginPage'; 
 import { CartProvider } from './CartContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Check for a user token on initial load
   useEffect(() => {
-    const token = localStorage.getItem('userToken');
-    if (token) {
+    const userToken = localStorage.getItem('userToken');
+    const adminToken = localStorage.getItem('adminToken');
+    if (userToken || adminToken) {
       setIsLoggedIn(true);
     }
   }, []);
 
-  const handleLogin = (token) => {
+  const handleLogin = (token, isAdmin = false) => {
     setIsLoggedIn(true);
-    localStorage.setItem('userToken', token);
+    if (isAdmin) {
+      localStorage.setItem('adminToken', token);
+    } else {
+      localStorage.setItem('userToken', token);
+    }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('userToken');
+    localStorage.removeItem('adminToken');
   };
 
   return (
@@ -50,18 +55,15 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           
-          {/* New User Auth Routes */}
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
           
-          {/* Protected Admin Route */}
           <Route
             path="/admin"
-            element={isLoggedIn ? <AdminPage /> : <Navigate to="/admin/login" />}
+            element={localStorage.getItem('adminToken') ? <AdminPage /> : <Navigate to="/admin/login" />}
           />
           
-          {/* Admin Login Route */}
-          <Route path="/admin/login" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
+          <Route path="/admin/login" element={<AdminLogin onLogin={() => handleLogin('dummy-token', true)} />} />
         </Routes>
         <Footer />
       </CartProvider>

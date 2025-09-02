@@ -47,7 +47,6 @@ function Navbar({ isLoggedIn, handleLogout }) {
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">
-            {/* Conditional User Auth Links */}
             {!isLoggedIn ? (
               <>
                 <li className="nav-item">
@@ -73,7 +72,6 @@ function Navbar({ isLoggedIn, handleLogout }) {
               </>
             )}
 
-            {/* Admin and Cart links */}
             <li className="nav-item">
               <Link className="nav-link" to="/admin">Admin</Link>
             </li>
