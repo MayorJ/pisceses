@@ -11,7 +11,7 @@ function ProductManagement() {
   }, []);
 
   const fetchProducts = () => {
-    fetch('http://localhost:3000/api/products')
+    fetch('https://backend-two-alpha-98.vercel.app/api/products')
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));
@@ -27,7 +27,7 @@ function ProductManagement() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = isEditing ? `http://localhost:3000/api/products/${editingId}` : 'http://localhost:3000/api/products';
+    const url = isEditing ? `https://backend-two-alpha-98.vercel.app/api/products/${editingId}` : 'https://backend-two-alpha-98.vercel.app/api/products';
     const method = isEditing ? 'PUT' : 'POST';
 
     fetch(url, {

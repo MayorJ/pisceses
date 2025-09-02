@@ -11,7 +11,7 @@ function BlogManagement() {
   }, []);
 
   const fetchBlogs = () => {
-    fetch('http://localhost:3000/api/blogs')
+    fetch('https://backend-two-alpha-98.vercel.app/api/blogs')
       .then(res => res.json())
       .then(data => setBlogs(data))
       .catch(err => console.error(err));
@@ -27,7 +27,7 @@ function BlogManagement() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = isEditing ? `http://localhost:3000/api/blogs/${editingId}` : 'http://localhost:3000/api/blogs';
+    const url = isEditing ? `https://backend-two-alpha-98.vercel.app/api/blogs/${editingId}` : 'https://backend-two-alpha-98.vercel.app/api/blogs';
     const method = isEditing ? 'PUT' : 'POST';
 
     fetch(url, {
