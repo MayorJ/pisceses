@@ -3,31 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminLogin = ({ onLogin }) => {
+function AdminLogin({ onLogin }) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const hardcodedPassword = 'admin123';
 
-    try {
-      if (password === 'adminpass') { // Use a hardcoded password for now
-        localStorage.setItem('adminToken', 'dummy-admin-token');
-        onLogin();
-        toast.success('Admin login successful!', { position: 'top-center' });
-        setTimeout(() => {
-          navigate('/admin');
-        }, 2000);
-      } else {
-        throw new Error('Invalid password');
-      }
-    } catch (error) {
-      toast.error(error.message, { position: 'top-center' });
+    if (password === hardcodedPassword) {
+      localStorage.setItem('adminToken', 'dummy-admin-token'); // Correctly save the token
+      onLogin(true); // Call onLogin with the admin flag
+      toast.success('Successfully logged in!', { position: "top-center", autoClose: 2000 });
+      setTimeout(() => {
+        navigate('/admin');
+      }, 2000); 
+    } else {
+      toast.error('Invalid password', { position: "top-center" });
     }
   };
 
   return (
-    <div className="container my-5">
+    <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card shadow">
@@ -40,15 +37,14 @@ const AdminLogin = ({ onLogin }) => {
                     type="password"
                     className="form-control"
                     id="password"
-                    name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary d-block w-100">
-                  Login as Admin
-                </button>
+                <div className="d-grid gap-2">
+                  <button type="submit" className="btn btn-primary">Login</button>
+                </div>
               </form>
             </div>
           </div>
@@ -57,6 +53,6 @@ const AdminLogin = ({ onLogin }) => {
       <ToastContainer />
     </div>
   );
-};
+}
 
 export default AdminLogin;
