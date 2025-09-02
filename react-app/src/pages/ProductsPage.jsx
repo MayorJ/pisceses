@@ -9,7 +9,7 @@ function ProductsPage() {
   const [inStockOnly, setInStockOnly] = useState(false); // Checkbox state
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/products')
+    fetch('https://backend-two-alpha-98.vercel.app/api/products')
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching products:', error));

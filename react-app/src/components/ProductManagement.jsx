@@ -54,7 +54,7 @@ function ProductManagement() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/api/products/${id}`, { method: 'DELETE' })
+    fetch(`https://backend-two-alpha-98.vercel.app/api/products/${id}`, { method: 'DELETE' })
       .then(() => fetchProducts())
       .catch(err => console.error(err));
   };

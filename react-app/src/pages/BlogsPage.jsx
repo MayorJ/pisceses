@@ -8,7 +8,7 @@ function BlogsPage() {
   const [selectedAuthor, setSelectedAuthor] = useState('all');
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/blogs')
+    fetch('https://backend-two-alpha-98.vercel.app/api/blogs')
       .then(response => response.json())
       .then(data => setBlogs(data))
       .catch(error => console.error('Error fetching blogs:', error));

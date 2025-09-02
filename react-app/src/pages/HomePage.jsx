@@ -9,7 +9,7 @@ function HomePage() {
 
   useEffect(() => {
     // Fetch Featured Products
-    fetch('http://localhost:3000/api/products?featured=true') // Replace with your actual API endpoint
+    fetch('https://backend-two-alpha-98.vercel.app/api/products?featured=true') // Replace with your actual API endpoint
       .then(response => response.json())
       .then(data => setFeaturedProducts(data))
       .catch(error => console.error('Error fetching featured products:', error));

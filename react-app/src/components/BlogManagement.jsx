@@ -54,7 +54,7 @@ function BlogManagement() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/api/blogs/${id}`, { method: 'DELETE' })
+    fetch(`https://backend-two-alpha-98.vercel.app/api/blogs/${id}`, { method: 'DELETE' })
       .then(() => fetchBlogs())
       .catch(err => console.error(err));
   };
