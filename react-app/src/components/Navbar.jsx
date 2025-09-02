@@ -6,7 +6,7 @@ function Navbar() {
   const { cartCount } = useCart();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark navbar-custom">
       <div className="container-fluid">
         <Link className="navbar-brand logo" to="/">
           PISCES. <span className="logo-symbol">♓</span>
