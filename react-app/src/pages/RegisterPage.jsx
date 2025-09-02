@@ -21,7 +21,7 @@ function RegisterPage() {
     setError('');
 
     try {
-      const response = await fetch('YOUR_VERCEL_BACKEND_URL/api/users/register', {
+      const response = await fetch('https://backend-two-alpha-98.vercel.app/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

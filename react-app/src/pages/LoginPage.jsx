@@ -20,7 +20,7 @@ function LoginPage({ onLogin }) {
     setError('');
 
     try {
-      const response = await fetch('YOUR_VERCEL_BACKEND_URL/api/users/login', {
+      const response = await fetch('https://backend-two-alpha-98.vercel.app/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
