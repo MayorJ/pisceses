@@ -1,3 +1,5 @@
+// src/components/AdminLogin.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -12,8 +14,8 @@ function AdminLogin({ onLogin }) {
     const hardcodedPassword = 'admin123';
 
     if (password === hardcodedPassword) {
-      localStorage.setItem('adminToken', 'dummy-admin-token'); // Correctly save the token
-      onLogin(true); // Call onLogin with the admin flag
+      // Pass the token and the 'admin' flag to the onLogin prop
+      onLogin('dummy-admin-token', true); 
       toast.success('Successfully logged in!', { position: "top-center", autoClose: 2000 });
       setTimeout(() => {
         navigate('/admin');
